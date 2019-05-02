@@ -23,9 +23,9 @@ let shadowsocks;
 if(runParams.indexOf('python') >= 0) {
   type = 'python';
   const tempPassword = 'qwerASDF' + Math.random().toString().substr(2, 8);
-  shadowsocks = spawn('ssserver', ['-m', method, '-p', '65535', '-k', tempPassword, '-t', '600', '--fast-open', '--manager-address', ssConfig ]);
+  shadowsocks = spawn('ssserver', ['-m', method, '-p', '65535', '-k', tempPassword, '--manager-address', ssConfig, '-t', '600', '--fast-open' ]);
 } else {
-  shadowsocks = spawn('ss-manager', ['-m', method, '-u', '--manager-address', ssConfig, '-t', '600', '--fast-open', '--plugin', 'obfs-server', '--plugin-opts', '"obfs=http;failover=www.bing.com:80"' ]);
+  shadowsocks = spawn('ss-manager', ['-m', method, '-u', '--manager-address', ssConfig, '--plugin', 'obfs-server', '--plugin-opts', '"obfs=tls;failover=www.bing.com:443"', '-t', '600', '--fast-open' ]);
 }
 
 shadowsocks.stdout.on('data', (data) => {
